@@ -1,4 +1,10 @@
 # SentenceFusion
+## Installation
+```
+git clone https://github.com/Pgibby8/SentenceFusion.git
+cd SentenceFusion
+pip install .
+```
 ## Summary
 SentenceFusion leverages seq-2-seq language models to combine sentences in a semantic space,
 allowing for the transfer of some components of one sentence to another.
