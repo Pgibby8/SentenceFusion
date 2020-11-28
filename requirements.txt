@@ -1,0 +1,4 @@
+SentenceFusion
+numpy >= 1.18
+torch >= 1.7.0
+transformers >= 3.5.1
