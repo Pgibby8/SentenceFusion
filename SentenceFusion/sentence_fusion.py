@@ -29,7 +29,8 @@ class SentenceFusion():
         self.decoder_start_token_id = decoder_start_token_id
         self.eos_token_id = eos_token_id
 
-    def fuse(self, primary_sent, secondary_sent, num_beams=3, delta=1, mode='mean'):
+    def fuse(self, primary_sent, secondary_sent, num_beams=3, delta=1, mode='mean',
+             rep_penalty=10.0, no_ngram_repeats=2):
         """
         Fuses two sentences, taking the semantics from the first sentence and higher level characteristics from the second
         :param primary_sent: the sentence from which to extract the semantics
@@ -81,8 +82,8 @@ class SentenceFusion():
         # instantiate logits processors
         logits_processor = LogitsProcessorList([
             MinLengthLogitsProcessor(5, eos_token_id=self.eos_token_id),
-            RepetitionPenaltyLogitsProcessor(10.0),
-            NoRepeatNGramLogitsProcessor(2)
+            RepetitionPenaltyLogitsProcessor(rep_penalty),
+            NoRepeatNGramLogitsProcessor(no_ngram_repeats)
         ])
         # instantiate logits processors
         logits_warper = LogitsProcessorList([
