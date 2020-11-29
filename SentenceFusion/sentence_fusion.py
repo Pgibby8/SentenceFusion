@@ -58,7 +58,7 @@ class SentenceFusion():
         if mode == 'mean':
             style = torch.mean(encoder_style_outputs[0], axis=1).unsqueeze(1)
             content = encoder_content_outputs.last_hidden_state
-            difference = style# - content
+            difference = style - content
             style.shape, content.shape, difference.shape
             style_direction = difference / torch.norm(difference, dim=2).unsqueeze(2)
             encoder_content_outputs.last_hidden_state += delta * style_direction
