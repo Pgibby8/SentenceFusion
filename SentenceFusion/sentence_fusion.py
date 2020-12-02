@@ -97,7 +97,7 @@ class SentenceFusion():
 
     def fuse_interactive(self, secondary_sent, num_beams=3, delta=1, mode='mean',
              rep_penalty=10.0, no_ngram_repeats=2):
-        call_fuse = lambda so_far: self.fuse(so_far, secondary_sent, num_beams, delta, mode, rep_penalty, no_ngram_repeats)
+        call_fuse = lambda so_far: self.fuse(so_far, secondary_sent, num_beams, delta, mode, rep_penalty, no_ngram_repeats)[0]
         curr_sentence = ""
         first = True
         while True:
@@ -110,7 +110,7 @@ class SentenceFusion():
             else:
                 curr_sentence = new_message
             first = False
-            curr_sentence = call_fuse(curr_sentence)[0]
+            curr_sentence = call_fuse(curr_sentence)
             print("Story so far:", curr_sentence)
         print("\n Final story:")
         print("------------------")
