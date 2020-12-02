@@ -94,3 +94,29 @@ class SentenceFusion():
             input_ids, beam_scorer, logits_processor=logits_processor, logits_warper=logits_warper, **model_kwargs
         )
         return self.tokenizer.batch_decode(outputs, skip_special_tokens=True)
+
+    def fuse_interactive(self, secondary_sent, num_beams=3, delta=1, mode='mean',
+             rep_penalty=10.0, no_ngram_repeats=2):
+        call_fuse = lambda so_far: self.fuse(so_far, secondary_sent, num_beams, delta, mode, rep_penalty, no_ngram_repeats)
+        curr_sentence = ""
+        first = True
+        while True:
+            msg_prompt = "Continue: " if not first else "Enter a sentence to begin with: "
+            new_message = input(msg_prompt)
+            if new_message == "":
+                break
+            if not first: 
+                curr_sentence += " " + new_message
+            else:
+                curr_sentence = new_message
+            first = False
+            curr_sentence = call_fuse(curr_sentence)
+            print("Story so far:", curr_sentence)
+        print("\n Final story:")
+        print("------------------")
+        print(curr_sentence)
+        print()
+        return curr_sentence
+
+
+
