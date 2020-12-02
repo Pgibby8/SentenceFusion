@@ -105,12 +105,13 @@ class SentenceFusion():
             new_message = input(msg_prompt)
             if new_message == "":
                 break
+            styled_message = call_fuse(new_message)
+
             if not first: 
-                curr_sentence += " " + new_message
+                curr_sentence += " " + styled_message
             else:
-                curr_sentence = new_message
-            first = False
-            curr_sentence = call_fuse(curr_sentence)
+                curr_sentence = styled_message
+                first = False
             print("Story so far:", curr_sentence)
         print("\n Final story:")
         print("------------------")
