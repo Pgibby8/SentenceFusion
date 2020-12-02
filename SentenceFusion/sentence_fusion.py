@@ -110,7 +110,7 @@ class SentenceFusion():
             else:
                 curr_sentence = new_message
             first = False
-            curr_sentence = call_fuse(curr_sentence)
+            curr_sentence = call_fuse(curr_sentence)[0]
             print("Story so far:", curr_sentence)
         print("\n Final story:")
         print("------------------")
