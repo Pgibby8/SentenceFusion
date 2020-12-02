@@ -108,7 +108,7 @@ class SentenceFusion():
             styled_message = call_fuse(new_message)
             print("Styled message:", styled_message)
             desired_styled_message = input("Now try to rewrite it: (Press enter to keep the styled sentence instead)")
-            desired_styled_message = desired_styled_message if not desired_styled_message.isspace() else styled_message
+            desired_styled_message = desired_styled_message if desired_styled_message != "" else styled_message
             if not first: 
                 curr_sentence += " " + desired_styled_message
             else:
